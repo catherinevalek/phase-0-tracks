@@ -1,0 +1,20 @@
+
+.octopus-styled {
+    margin: auto;
+    width:200px;
+    margin-top: 150px;
+}
+
+#hat {
+  position: relative;
+  bottom: 350px;
+  right: 25px;
+
+}
+
+#glasses {
+  position: relative;
+  left: 40px;
+  bottom: 365px;
+
+}
