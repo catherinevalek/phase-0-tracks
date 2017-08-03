@@ -4,6 +4,16 @@ blockquote {
   margin-left: 0px;
 }
 
+body {
+  max-width: 960px;
+    }
+
+main {
+  width: 700px;
+  display: inline-block;
+  vertical-align: top;
+}
+
 cite {
   display: block;
   margin-top: 10px;
@@ -13,7 +23,11 @@ cite {
   list-style-type: none;
   padding-left: 0px;
 }
-
+#external-links {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+}
 /* you're welcome to edit the
 image, figure, and figcaption CSS if you'd like, 
 but it's optional! */
@@ -30,3 +44,24 @@ figcaption {
   font-style: italic;
   text-align: right;
 }
+
+
+@media screen and (max-width: 800px) {
+  ul li a {
+    background: url(bullet_green.png) left top no-repeat;
+    padding-left: 12px;
+    display: inline-block;
+  }
+}
+@media screen and (orientation: landscape) {
+  body {
+    font-size: 150%;
+  }
+}
+
+
+/*@media screen and (max-width: 500px) {
+  body {
+    background-color: hotpink;
+  }
+}*/
