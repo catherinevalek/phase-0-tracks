@@ -36,22 +36,22 @@ else
 end
 
 
-vampire_result = true
-	
+vampire_result = 0
+
+if age_correct == true && (eats_garlic == true || wants_insurance == true)
+	vampire_result = 1
+end
+if age_correct == false && (eats_garlic == false || wants_insurance == false)
+	vampire_result = 2
+end
+if age_correct == false && eats_garlic == false && wants_insurance == false
+	vampire_result = 3
+end
 if vamp_name == "Drake Cula" || vamp_name == "Tu Fang"
-	p "Definitely a vampire"
-elsif age_correct == false && eats_garlic == false && wants_insurance == false
-	p "Almost certainy a vampire"
-
-elsif age_correct == true && (eats_garlic || wants_insurance)
-	p "Probably not a vampire"
-elsif age_correct == false && (eats_garlic == fals|| !wants_insurance)
-	p "Probably a vampire"
-
-else
-	p "Results inconclusive"
+	vampire_result = 4
+end
+if vampire_result == 0
+	vampire_result = 5
 end
 
-
-
-
+p "this is the result #{vampire_result}"
