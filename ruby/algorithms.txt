@@ -1,0 +1,34 @@
+Robot using an elevator
+-If you are on the 1st floor 
+	-Until you find the floor of your destination
+		-Walk into the elevator 
+		-Turn around to face the elevator button panel
+		-Add 1 to the floor number you are on
+		-Press that corresponding number on the button panel
+		-Wait until the elevator closes and dings
+		-When the elevator opens
+		-Walk out and see if it is the correct floor
+-If you are not on the base floor (floor 1)
+	-Walk into the elevator 
+	-Turn around to face the elevator button panel
+	-Press the 1 button to go to the first floor
+	-Wait until the elevator closes and dings
+	-When the elevator opens
+	-Walk out and see if it is the correct floor
+	-Until you find the floor of your destination
+		-Walk into the elevator 
+		-Turn around to face the elevator button panel
+		-Add 1 to the floor number you are on
+		-Press that corresponding number on the button panel
+		-Wait until the elevator closes and dings
+		-When the elevator opens
+		-Walk out and see if it is the correct floor
+		-Walk into the elevator 
+		-Turn around to face the elevator button panel
+
+Putting on mascara
+-Take mascara wand out of the mascara tube
+	-For each eye
+		-Until all eyelashes have been coated
+			-Move eyelash wand in an upward motion against eyelashes
+-Put wand back into mascara tube
