@@ -1,5 +1,3 @@
-
-
 #determine if employee is a vampire
 def vampire_decision ()
 	puts "What is your name?"
