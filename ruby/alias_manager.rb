@@ -49,9 +49,13 @@ def change_characters(char)
 	new_character
 end
 
-string = 'Felicia Torres'
-p create_fake_name(string)
 
+loop do 
+	puts "Please enter a name. Enter 'quit' to exit."
+	user_name = gets.chomp
+	break if user_name == 'quit'
+	p create_fake_name(user_name)
+end
 
 
 
