@@ -105,9 +105,7 @@ if final == word
 else
   p "Sorry, you're wrong!"
 end
-
-
-
+ 
 
 
 

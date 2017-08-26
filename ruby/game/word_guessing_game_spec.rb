@@ -3,23 +3,19 @@ require_relative 'word_guessing_game'
 describe Game do
   let(:word) { Game.new("apple") }
 
-  it "stores the word given by user1 on initialization" do
-    expect(word.get_word).to eq "apple"
+  it "stores length of word" do
+    expect(word.word_length).to eq 5
   end
 
-  it "stores max number of guesses as length of word" do
-    expect(word.guesses).to eq 5
+  it "checks how many times letter is in word" do
+    expect(word.check_letter("p")).to eq 2
   end
 
-  it "checks if letter by user2 is in word" do
-    expect(word.check_letter("i")).to eq 0
-  end
-
-    it "checks index" do
+    it "checks index of letter in word" do
     expect(word.find_index("p")).to eq 1
   end
 
   it "stores found letters" do
-    expect(word.add_letter('p')).to eq (['p','p'])
+    expect(word.add_letter('p')).to eq ("pp")
   end
 end
