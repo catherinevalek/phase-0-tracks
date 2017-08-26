@@ -12,11 +12,14 @@ describe Game do
   end
 
   it "checks if letter by user2 is in word" do
-    word.check_letter("p")
-    expect(word.check_letter).to eq true
+    expect(word.check_letter("i")).to eq 0
+  end
+
+    it "checks index" do
+    expect(word.find_index("p")).to eq 1
   end
 
   it "stores found letters" do
-    expect(word.found_letters).to eq (['p','p'])
+    expect(word.add_letter('p')).to eq (['p','p'])
   end
 end
