@@ -13,7 +13,7 @@ function find_longest_word(word_list) {
       longest_item = word_list[i];
     }
   }
-  return longest_item
+  return longest_item;
 }
 
 
@@ -30,11 +30,12 @@ function find_longest_word(word_list) {
 function key_value_match(first_object, second_object) {
   for (var key_from_first in first_object) {
   	for (var key_from_second in second_object) {
-  	  if ((key_from_first == key_from_second) && (first_object[key_from_first] == second_object[key_from_second]))
-  	    return true
+  	  if ((key_from_first == key_from_second) && (first_object[key_from_first] == second_object[key_from_second])) {
+  	  	return true;
+  	  }
   	}
   }
-  return false
+  return false;
 }
 
 
@@ -48,40 +49,46 @@ function create_test_data(list_length) {
   var random_words = [];
   var alphabet = "abcdefghijklmnopqrstuvwxyz";
   for (var i = 0; i < list_length; i ++) {
-  	var word = ''
+  	var word = '';
     var num_char = (Math.floor(Math.random() * 10) + 1);
     for (var j = 0; j < num_char; j++) {
       word += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
     }
-    random_words.push(word)
+    random_words.push(word);
   }
-  return random_words
+  return random_words;
 }
 
-console.log(create_test_data(3))
+
 
 var words_and_phrases = ["long phrase","longest phrase","longer phrase"];
-console.log(find_longest_word(words_and_phrases))
+console.log(find_longest_word(words_and_phrases));
 
 var more_words = ["elephant","penguin","tiger"];
-console.log(find_longest_word(more_words))
+console.log(find_longest_word(more_words));
 
 var first = {name: 'Spot', 'age': 3, isGoodDog: true};
 var second = {name: 'Joe', 'age': 3, isGoodDog: false};
-console.log(key_value_match(first, second))
+console.log(key_value_match(first, second));
 
 var third = {name: 'Tome', 'age': 4, isGoodDog: true};
 var fourth = {name: 'Joe', 'age': 3, isGoodDog: true};
-console.log(key_value_match(third, fourth))
+console.log(key_value_match(third, fourth));
 
 var fifth = {name: 'Tome', 'age': 4, isGoodDog: false};
 var sixth = {name: 'Joe', 'age': 3, isGoodDog: true};
-console.log(key_value_match(fifth, sixth))
+console.log(key_value_match(fifth, sixth));
 
 var seventh = {name: 'Tome', 'age': 4, isGoodDog: false};
 var eighth = {color: 'red', 'shape': 'square', size: 'small'};
-console.log(key_value_match(seventh, eighth))
+console.log(key_value_match(seventh, eighth));
 
+
+for (var i = 0; i < 10; i++) {
+  var current_array = (create_test_data(4));
+  console.log(current_array);
+  console.log(find_longest_word(current_array));
+}
 
 
 
