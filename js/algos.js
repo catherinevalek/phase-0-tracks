@@ -1,6 +1,7 @@
+// Create way to store longest word
 // For each item in the array
 //   Find the length of the word or phrase
-//     Compare the length to the next item in the array
+//     Compare the length to the current longest word
 //     Store the word or phrase that is longer
 // Return the longest string found
 
@@ -12,8 +13,18 @@ function find_longest_word(word_list) {
       longest_item = word_list[i];
     }
   }
-  console.log(longest_item)
+  return longest_item
 }
+
+
+// For two objects containing keys and values
+//   If the first key-value pair in the first object is the same as the first set in the second_object
+//     Return true
+//   If not, compare it with second key-value pair in the second object and so on
+//   If no matches, move on to the second key-value pair in the first object and compare
+//     Keep moving to next item in first object until end is reached
+//   If there were no matches
+//     Return false
 
 
 function key_value_match(first_object, second_object) {
@@ -27,13 +38,33 @@ function key_value_match(first_object, second_object) {
 }
 
 
+// Create an empty list to store words
+//   For the length of the list given
+//     Create a word with random length up to ten characters
+//     Add the word to the list
+// Return the list
 
+function create_test_data(list_length) {
+  var random_words = [];
+  var alphabet = "abcdefghijklmnopqrstuvwxyz";
+  for (var i = 0; i < list_length; i ++) {
+  	var word = ''
+    var num_char = (Math.floor(Math.random() * 10) + 1);
+    for (var j = 0; j < num_char; j++) {
+      word += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+    }
+    random_words.push(word)
+  }
+  return random_words
+}
+
+console.log(create_test_data(3))
 
 var words_and_phrases = ["long phrase","longest phrase","longer phrase"];
-find_longest_word(words_and_phrases);
+console.log(find_longest_word(words_and_phrases))
 
 var more_words = ["elephant","penguin","tiger"];
-find_longest_word(more_words);
+console.log(find_longest_word(more_words))
 
 var first = {name: 'Spot', 'age': 3, isGoodDog: true};
 var second = {name: 'Joe', 'age': 3, isGoodDog: false};
