@@ -1,0 +1,89 @@
+1. Display the information in one table (either table is fine).
+
+sqlite> select * from students;
+1|James|12|science|true|false|11|1
+2|Elizabeth|12|math|false|true|9|3
+3|Robin|12|history|true|true|2|2
+4|Ezra|11|art|false|true|7|1
+5|Jane|13|science|true|true|4|3
+6|Meredith|12|english|true|false|15|2
+7|Patrick|13|math|false|false|18|3
+8|Caitlin|11|p.e.|false|true|5|1
+9|Charles|12|computer|true|true|13|2
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+
+sqlite> update students set brings_lunch="false" where name="Elizabeth";
+
+3. Display the information in both tables using one query.
+
+sqlite> select * from students, teachers where students.teacher_id = teachers.id;
+1|James|12|science|true|false|11|1|1|Mrs. Collins
+2|Elizabeth|12|math|false|false|9|3|3|Mr. Wilson
+3|Robin|12|history|true|true|2|2|2|Ms. Gold
+4|Ezra|11|art|false|true|7|1|1|Mrs. Collins
+5|Jane|13|science|true|true|4|3|3|Mr. Wilson
+6|Meredith|12|english|true|false|15|2|2|Ms. Gold
+7|Patrick|13|math|false|false|18|3|3|Mr. Wilson
+8|Caitlin|11|p.e.|false|true|5|1|1|Mrs. Collins
+9|Charles|12|computer|true|true|13|2|2|Ms. Gold
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+
+sqlite> select students.name, students.fave_class, teachers.name from students join teachers on students.teacher_id = teachers.id;
+James|science|Mrs. Collins
+Elizabeth|math|Mr. Wilson
+Robin|history|Ms. Gold
+Ezra|art|Mrs. Collins
+Jane|science|Mr. Wilson
+Meredith|english|Ms. Gold
+Patrick|math|Mr. Wilson
+Caitlin|p.e.|Mrs. Collins
+Charles|computer|Ms. Gold
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+
+sqlite> delete from students where name="Charles";
+
+release 3:
+
+sqlite> select teachers.name, students.name from students join teachers on teachers.id = students.id;
+Mrs. Collins|James
+Ms. Gold|Elizabeth
+Mr. Wilson|Robin
+
+sqlite> select students.name, teachers.name from students left join teachers on teachers.id = students.teacher_id;
+James|Mrs. Collins
+Elizabeth|Mr. Wilson
+Robin|Ms. Gold
+Ezra|Mrs. Collins
+Jane|Mr. Wilson
+Meredith|Ms. Gold
+Patrick|Mr. Wilson
+Caitlin|Mrs. Collins
+
+sqlite> select students.name, teachers.name from teachers cross join students;
+James|Mrs. Collins
+Elizabeth|Mrs. Collins
+Robin|Mrs. Collins
+Ezra|Mrs. Collins
+Jane|Mrs. Collins
+Meredith|Mrs. Collins
+Patrick|Mrs. Collins
+Caitlin|Mrs. Collins
+James|Ms. Gold
+Elizabeth|Ms. Gold
+Robin|Ms. Gold
+Ezra|Ms. Gold
+Jane|Ms. Gold
+Meredith|Ms. Gold
+Patrick|Ms. Gold
+Caitlin|Ms. Gold
+James|Mr. Wilson
+Elizabeth|Mr. Wilson
+Robin|Mr. Wilson
+Ezra|Mr. Wilson
+Jane|Mr. Wilson
+Meredith|Mr. Wilson
+Patrick|Mr. Wilson
+Caitlin|Mr. Wilson
