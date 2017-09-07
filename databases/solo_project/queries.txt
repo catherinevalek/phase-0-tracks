@@ -44,3 +44,46 @@ Charles|computer|Ms. Gold
 5. Delete an item that meets some condition (you can choose a condition that makes sense).
 
 sqlite> delete from students where name="Charles";
+
+release 3:
+
+sqlite> select teachers.name, students.name from students join teachers on teachers.id = students.id;
+Mrs. Collins|James
+Ms. Gold|Elizabeth
+Mr. Wilson|Robin
+
+sqlite> select students.name, teachers.name from students left join teachers on teachers.id = students.teacher_id;
+James|Mrs. Collins
+Elizabeth|Mr. Wilson
+Robin|Ms. Gold
+Ezra|Mrs. Collins
+Jane|Mr. Wilson
+Meredith|Ms. Gold
+Patrick|Mr. Wilson
+Caitlin|Mrs. Collins
+
+sqlite> select students.name, teachers.name from teachers cross join students;
+James|Mrs. Collins
+Elizabeth|Mrs. Collins
+Robin|Mrs. Collins
+Ezra|Mrs. Collins
+Jane|Mrs. Collins
+Meredith|Mrs. Collins
+Patrick|Mrs. Collins
+Caitlin|Mrs. Collins
+James|Ms. Gold
+Elizabeth|Ms. Gold
+Robin|Ms. Gold
+Ezra|Ms. Gold
+Jane|Ms. Gold
+Meredith|Ms. Gold
+Patrick|Ms. Gold
+Caitlin|Ms. Gold
+James|Mr. Wilson
+Elizabeth|Mr. Wilson
+Robin|Mr. Wilson
+Ezra|Mr. Wilson
+Jane|Mr. Wilson
+Meredith|Mr. Wilson
+Patrick|Mr. Wilson
+Caitlin|Mr. Wilson
