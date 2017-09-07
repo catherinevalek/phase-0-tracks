@@ -1,0 +1,17 @@
+Release 2, question 2:
+select * from business join reviews on business.id=reviews.business_id join users on reviews.users_id=users.id;
+3|The Beagle Nighclub|1|5|great place to bring friends!|3|2|2|Mandy|Kaling
+1|Grundy Hollow Wedding Chapel|2|1|Friends wedding was beautiful.  Great views!|1|1|1|Bradford|Pitt
+2|Amir's Towing|3|1|They never showed up!|2|1|1|Bradford|Pitt
+
+
+Release 2, question 3:
+select users.first_name, reviews.stars, reviews.comment, business.name from users join reviews on users.id=reviews.users_id join business on reviews.business_id=business.id;
+Mandy|5|great place to bring friends!|The Beagle Nighclub
+Bradford|1|Friends wedding was beautiful.  Great views!|Grundy Hollow Wedding Chapel
+Bradford|1|They never showed up!|Amir's Towing
+
+
+Release 2, question 4:
+select * from business join reviews on business.id=reviews.business_id join users on reviews.users_id=users.id where business.name="The Beagle Nighclub";
+3|The Beagle Nighclub|1|5|great place to bring friends!|3|2|2|Mandy|Kaling
