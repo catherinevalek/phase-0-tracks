@@ -1,25 +1,9 @@
-
-# Write a Ruby program that uses persistent data 
-# to make your life better, or makes someone else's 
-# life better. Find several opportunities to try 
-# something not explicitly shown in the video. Can 
-# users create data? Retrieve it? Manipulate it? 
-# It's up to you. Push yourself, and decide with 
-# integrity when you are finished. Note that you do 
-# not need to use classes in this assignment -- 
-# keeping a class instance and a database row in 
-# sync is a lot of work, so that might be too much 
-# to tackle.
-
 require 'sqlite3'
-require 'faker'
 
-#create databases
-friend_db = SQLite3::Database.new("birthday_tracker.db")
-interest_db = SQLite3::Database.new("birthday_tracker.db")
-friends_interests_db = SQLite3::Database.new("birthday_tracker.db")
+#creates database
+db = SQLite3::Database.new("birthday_tracker.db")
 
-#create a table of friends and their birthdays
+#creates a table of friends and their birthdays
 create_friend_table = <<-SQL 
   CREATE TABLE IF NOT EXISTS friends(
     id INTEGER PRIMARY KEY,
@@ -31,39 +15,79 @@ create_friend_table = <<-SQL
     )
 SQL
 
-#create a table for friends' interests
+#creates a table for friends' interests
 create_interest_table = <<-SQL 
   CREATE TABLE IF NOT EXISTS interests(
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     interest VARCHAR(255)
     )
 SQL
 
-#create a join table to link a people to interests
+#creates a join table that joins a friends to interests
 create_friends_interests_table = <<-SQL 
   CREATE TABLE IF NOT EXISTS friends_interests(
     friend_id INT,
-    interest_id INT
+    interest_id INT, 
+    FOREIGN KEY (friend_id) REFERENCES friends(id), FOREIGN KEY (interest_id) REFERENCES interests(id)
     )
 SQL
 
-friend_db.execute(create_friend_table)
-interest_db.execute(create_interest_table)
-friends_interests_db.execute(create_friends_interests_table)
+#checks if the interests table is empty
+check_table = <<-SQL
+  SELECT count(*) FROM interests 
+SQL
+
+#creates the tables in the database
+db.execute(create_friend_table)
+db.execute(create_interest_table)
+db.execute(create_friends_interests_table)
 
 
+#method that adds an interest to interest_db database
+def add_interest(db, interest)
+  db.execute("INSERT INTO interests (interest) VALUES (?)", [interest])
+end
+
+#method that adds a friend to friend_db database
 def add_friend(db, friend_name, age, birth_month, birth_day, likes_birthdays)
   db.execute("INSERT INTO friends (friend_name, age, birth_month, birth_day, likes_birthdays) VALUES (?, ?, ?, ?, ?)", [friend_name, age, birth_month, birth_day, likes_birthdays])
 end
 
-def add_interest(db, interest)
-  db.execute("INSERT INTO interests (interest) VALUES (?, ?)", [interest])
+#method that joins a friend to their interest in the join table
+def add_friend_interest(db, friend_id, interest_id)
+    db.execute("INSERT INTO friends_interests (friend_id, interest_id) VALUES (?, ?)", [friend_id, interest_id])
 end
 
+#method that returns the id of the name specied from the friends table
+def find_friend_id(db, friend_name)
+  friend_id = db.execute("SELECT friends.id FROM friends WHERE friend_name='#{friend_name}'")
+  friend_id[0][0]
+end
 
+#method that returns the id of the interest specied from the interests table
+def find_interest_id(db, interest_name)
+  interest_id = db.execute("SELECT interests.id FROM interests WHERE interest='#{interest_name}'")
+  interest_id[0][0]
+end
 
+#method that returns an array of all the interests of a friend
+def find_interests_array(db, friend_name)
+  friend_interests = db.execute("SELECT interests.interest FROM friends join friends_interests on friends.id=friends_interests.friend_id join interests on interests.id=friends_interests.interest_id where friend_name='#{friend_name}'")
+end
+
+#populates interest table
+interest_list = ["art", "sports", "literature", "the outdoors", "movies", "video games", "traveling", "crafting", "music", "fitness"]
+
+interest_row_count = db.execute(check_table)[0][0]
+if interest_row_count == 0
+  interest_list.each do |interest|
+    add_interest(db, interest)
+  end
+end
+
+#asks user for details about a friend and adds them to friends table
 loop do 
-  puts "What's your friend's name?"
+  puts "What's your friend's name? Type 'quit' to escape."
   friend_name = gets.chomp
   break if friend_name == "quit"
   puts "What's your friend's age?"
@@ -77,10 +101,29 @@ loop do
   likes_birthdays = answer == "Y"
   likes_birthdays = likes_birthdays.to_s
 
-  add_friend(friend_db, friend_name, age, month, day, likes_birthdays)
+  add_friend(db, friend_name, age, month, day, likes_birthdays)
+  #asks user for friend's interests and adds them to the interest table
+  loop do 
+    puts "What is your friend interested in? Type 'quit' to escape."
+    interest = gets.chomp
+    break if interest == "quit"
+    if interest_list.include? interest
+      add_friend_interest(db, find_friend_id(db, friend_name), find_interest_id(db, interest))
+    else
+      puts "Please enter a valid interest."
+    end
+  end
 end
 
-
-
-
+#prints all friends' information and interests
+all_friends = db.execute("SELECT * FROM friends")
+all_friends.each do |friend|
+  puts "***************************************"
+  puts "#{friend[1]} is #{friend[2]}. #{friend[1]}'s birthday is on #{friend[3]}/#{friend[4]}."
+  puts "Some of #{friend[1]}'s interests include:"
+  find_interests_array(db, friend[1]).each do |interest|  
+    puts interest
+  end
+  puts 
+end
 
